@@ -46,6 +46,6 @@ hook global FocusIn .* change-directory-project-root
 - `change-directory-git`: Change the working directory to the Git root
 
 [Kakoune]: https://kakoune.org
-[IRC]: https://webchat.freenode.net?channels=kakoune
+[IRC]: https://webchat.freenode.net/#kakoune
 [IRC Badge]: https://img.shields.io/badge/IRC-%23kakoune-blue.svg
 [Pathogen]: https://github.com/alexherbo2/pathogen.kak
