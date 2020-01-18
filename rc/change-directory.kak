@@ -1,26 +1,20 @@
-define-command change-directory-buffer -params 0..1 -buffer-completion -docstring 'Change the working directory to the given (or current) buffer directory' %{
-  evaluate-commands -draft %{
-    buffer %sh(printf '%s' "${1:-$kak_bufname}")
-    change-directory %sh{
-      path=$kak_buffile
-      search_directory() {
-        path=$1
-        while test ! -d "$path"; do
-          path=$(dirname "$path")
-        done
-        printf '%s' "$path"
-      }
-      search_directory "$path"
+provide-module change-directory %{
+  define-command change-directory-buffer -params 1 -buffer-completion -docstring 'Change the working directory to the given buffer directory' %{
+    evaluate-commands -buffer %arg{1} %{
+      change-directory %sh(dirname "$kak_buffile")
     }
   }
+  define-command change-directory-current-buffer -docstring 'Change the working directory to the current buffer directory' %{
+    change-directory-buffer %val{buffile}
+  }
+  define-command change-directory-git-root -docstring 'Change the working directory to the Git root directory' %{
+    change-directory-current-buffer
+    change-directory %sh(git rev-parse --show-toplevel)
+  }
+  alias global cd-buffer change-directory-buffer
+  alias global cd-current-buffer change-directory-current-buffer
+  alias global cd-git-root change-directory-git-root
+  alias global cd! change-directory-git-root
 }
 
-define-command change-directory-git -docstring 'Change the working directory to the Git root' %{
-  change-directory %sh{
-    git_directory=$(git rev-parse --absolute-git-dir 2> /dev/null)
-    if test $? -eq 0; then
-      git_root=$(dirname "$git_directory")
-      printf '%s' "$git_root"
-    fi
-  }
-}
+require-module change-directory

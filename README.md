@@ -1,51 +1,17 @@
-# change-directory
+# change-directory.kak
 
-[![IRC][IRC Badge]][IRC]
-
-###### [Usage](#usage) | [Documentation](#commands) | [Contributing](CONTRIBUTING)
-
-> [Kakoune] extension to `change-directory` with additional switches.
+[`change-directory`] with additional features, to change to the buffer or [Git] root directory.
 
 ## Installation
 
-### [Pathogen]
-
-``` kak
-pathogen-infect /home/user/repositories/github.com/alexherbo2/change-directory.kak
-```
-
-## Configuration
+Add [`change-directory.kak`](rc/change-directory.kak) to your autoload or source it manually.
 
 ## Usage
 
-```
-change-directory [-buffer] [-git] [directory]
-```
+Change the working directory with `change-directory-buffer`, `change-directory-current-buffer` or `change-directory-git-root`.
+They have aliases on `cd-buffer`, `cd-current-directory` and `cd-git-root` respectively.
+Use `cd!` to change to the [Git] root directory.
 
-**Example** – Add a command to switch to the project root of the current buffer:
-
-``` kak
-define-command change-directory-project-root %{
-  change-directory-buffer
-  try change-directory-git
-}
-
-alias global cd! change-directory-project-root
-```
-
-**Example** – Automatically switch to the project root of the current buffer:
-
-``` kak
-hook global WinDisplay .* change-directory-project-root
-hook global FocusIn .* change-directory-project-root
-```
-
-## Commands
-
-- `change-directory-buffer [buffer-name = current-buffer]`: Change the working directory to the given (or current) buffer directory
-- `change-directory-git`: Change the working directory to the Git root
-
+[`change-directory`]: https://github.com/mawww/kakoune/blob/master/doc/pages/commands.asciidoc#files-and-buffers
 [Kakoune]: https://kakoune.org
-[IRC]: https://webchat.freenode.net/#kakoune
-[IRC Badge]: https://img.shields.io/badge/IRC-%23kakoune-blue.svg
-[Pathogen]: https://github.com/alexherbo2/pathogen.kak
+[Git]: https://git-scm.com
