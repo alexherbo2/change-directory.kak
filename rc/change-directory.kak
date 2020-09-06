@@ -16,5 +16,3 @@ provide-module change-directory %{
   alias global cd-git-root change-directory-git-root
   alias global cd! change-directory-git-root
 }
-
-require-module change-directory

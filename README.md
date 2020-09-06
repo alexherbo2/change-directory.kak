@@ -6,6 +6,10 @@
 
 Add [`change-directory.kak`](rc/change-directory.kak) to your autoload or source it manually.
 
+``` kak
+require-module change-directory
+```
+
 ## Usage
 
 Change the working directory with `change-directory-buffer`, `change-directory-current-buffer` or `change-directory-git-root`.
